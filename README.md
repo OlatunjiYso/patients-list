@@ -5,6 +5,11 @@ An optimised patient listing algorithm that helps provide the patients with high
 GET : http://localhost:3000/patients?lat=60.500&lon=80.2500.   
 Where `lat` and `lon` is the latitude and longitude of the facility respectively.
 
+#### Setting up
+- clone the repo
+- run `npm install`
+- run `npm start`
+
 
 ### Sorting Factors
 - Offer cancellation history
