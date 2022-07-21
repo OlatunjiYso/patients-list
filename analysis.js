@@ -23,8 +23,7 @@ function cummulatveAnalysis(facilityLat, facilityLon) {
     return report;
   });
   reportList.sort((reportA, reportB) => reportB.points - reportA.points);
-  console.log(`reportList ${JSON.stringify(reportList.slice(0, 5))}`);
-  return reportList.slice(0, 20);
+  return reportList.slice(0, 10);
 }
 
 // Analysing the data for the mean response time
@@ -95,48 +94,7 @@ function getProximityPoint(facilityLat, facilityLon, patient) {
   return 7;
 }
 
-//get age distribution
-function minMaxAge() {
-  let maxAge = 0;
-  let minAge = 1000;
-  for (let i = 0; i < patients.length; i++) {
-    if (maxAge < patients[i].age) maxAge = patients[i].age;
-    if (minAge > patients[i].age) minAge = patients[i].age;
-  }
-  console.log(`max: ${maxAge} min: ${minAge}`);
-}
 
-//Analysing data for response time for age group
-function ageGroupRespTime(minAge, maxAge) {
-  let count = 0;
-  let respTimes = 0;
-  for (let i = 0; i < patients.length; i++) {
-    const patientAge = patients[i].age;
-    if (patientAge <= maxAge && patientAge >= minAge) {
-      count += 1;
-      respTimes += patients[i].averageReplyTime;
-    }
-  }
-  console.log(`avg: ${Math.ceil(respTimes / count)}, count: ${count}`);
-}
-
-//Analysing data for percentage acceptance for age group
-function ageGroupAcceptance(minAge, maxAge) {
-  let acceptCount = 0;
-  let cancelCount = 0;
-  for (let i = 0; i < patients.length; i++) {
-    const patientAge = patients[i].age;
-    if (patientAge <= maxAge && patientAge >= minAge) {
-      acceptCount += patients[i].acceptedOffers;
-      cancelCount += patients[i].canceledOffers;
-    }
-  }
-  console.log(
-    `avgAcceptance: ${Math.ceil(
-      (acceptCount / (acceptCount + cancelCount)) * 100
-    )}`
-  );
-}
 
 function getWeightedPercentage(actualPercentage, percentageWeight) {
   return (actualPercentage * percentageWeight) / 100;
@@ -162,10 +120,5 @@ function distanceApart(lat1, lat2, lon1, lon2) {
   // calculate the result
   return c * r;
 }
-
-// cummulatveAnalysis(51.5072, 0.1276);
-
-// const u = patients.find((p) => p.averageReplyTime == 0);
-// console.log("u", u);
 
 module.exports = cummulatveAnalysis;
